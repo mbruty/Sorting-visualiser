@@ -5,6 +5,7 @@ import ContentBox from './ContentBox';
 import bubbleSort from './sorting algos/BubbleSort';
 import insertionSort from './sorting algos/InsertionSort';
 import selectionSort from './sorting algos/SelectionSort'
+import HeapSort from './sorting algos/HeapSort';
 
 class App extends React.Component {
     constructor(props) {
@@ -86,6 +87,10 @@ class App extends React.Component {
 
 			case 'Selection Sort':
 				selectionSort(params);
+				break;
+
+			case 'Heap Sort':
+				HeapSort(params);
 				break;
 				
         }
