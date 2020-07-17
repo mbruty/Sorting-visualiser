@@ -7,14 +7,25 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data: [57,91,37,16,14,38,88,98,68,88,18,34,37,5,94,17,41,39,93,75,3,28,19,36,56,82,28,64,51,64,92,62,37,58,96,13,83,84,73,38,97,21,23,13,88,76,81,15,18,66,49,9,57,72,13,2,78,85,33,39,92,84,37,63,24],
       algorithm: 'Bubble',
-      samples: 25
+      samples: 25,
+      data: []
     }
+
+    this.state.data = this.randList(this.state.samples);
 
     this.onChange = this.onChange.bind(this);
     this.showState = this.showState.bind(this);
+    this.randList = this.randList.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  randList(nItems){
+    let arr = [];
+    for(let i = 0; i < nItems; ++i){
+      arr.push(Math.floor(Math.random() * 100));
+    }
+    return arr;
   }
 
   onChange(){
@@ -25,7 +36,8 @@ class App extends React.Component {
     let {value, min, max} = e.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     e.target.value = value;
-    this.setState({ ...this.state, samples: Number(value) });
+    let newList = this.randList(value);
+    this.setState({ ...this.state, samples: Number(value), data: newList});
   }
 
   showState(){
