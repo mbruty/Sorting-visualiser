@@ -2,13 +2,17 @@ import React from 'react';
 import './App.css';
 import InfoBox from './InfoBox'
 import ContentBox from './ContentBox';
+import bubbleSort from './BubbleSort'
+
 class App extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      algorithm: 'Bubble',
+      algorithm: 'Bubble Sort',
       samples: 25,
+      delay: 25,
+      sort: false,
       data: []
     }
 
@@ -18,6 +22,7 @@ class App extends React.Component {
     this.showState = this.showState.bind(this);
     this.randList = this.randList.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.sort = this.sort.bind(this);
   }
 
   randList(nItems){
@@ -37,7 +42,19 @@ class App extends React.Component {
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     e.target.value = value;
     let newList = this.randList(value);
-    this.setState({ ...this.state, samples: Number(value), data: newList});
+    if(e.target.id == "samples"){
+      this.setState({ ...this.state, samples: Number(value), data: newList});
+    }
+    else if(e.target.id == "delay"){
+      this.setState({ ...this.state, delay: Number(value)});
+    }
+  }
+
+  sort(){
+    switch(this.state.algorithm){
+      case 'Bubble Sort':
+        bubbleSort({data: this.state.data, delay: this.state.delay, callback: (data) => { this.setState( {...this.state, data: data})}})
+    }
   }
 
   showState(){
@@ -48,7 +65,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <ContentBox data={this.state.data}/>
-        <InfoBox onChange={this.onChange} handleChange={this.handleChange} showState={this.showState}/>
+        <InfoBox onChange={this.onChange} handleChange={this.handleChange} showState={this.showState} sort={this.sort}/>
       </div>
     )
   }
