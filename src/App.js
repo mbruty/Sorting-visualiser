@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import InfoBox from './InfoBox'
 import ContentBox from './ContentBox';
-import bubbleSort from './BubbleSort';
-import insertionSort from './InsertionSort';
+import bubbleSort from './sorting algos/BubbleSort';
+import insertionSort from './sorting algos/InsertionSort';
+import selectionSort from './sorting algos/SelectionSort'
 
 class App extends React.Component {
     constructor(props) {
@@ -64,31 +65,27 @@ class App extends React.Component {
     }
 
     sort() {
+		const params = {
+			data: this.state.data,
+			delay: this.state.delay,
+			callback: (data) => {
+				this.setState({
+					...this.state,
+					data: data
+				})
+			}
+		}
         switch (this.state.algorithm) {
             case 'Bubble Sort':
-                bubbleSort({
-                    data: this.state.data,
-                    delay: this.state.delay,
-                    callback: (data) => {
-                        this.setState({
-                            ...this.state,
-                            data: data
-                        })
-                    }
-				});
+                bubbleSort(params);
 				break;
 			
 			case 'Insertion Sort':
-				insertionSort({
-                    data: this.state.data,
-                    delay: this.state.delay,
-                    callback: (data) => {
-                        this.setState({
-                            ...this.state,
-                            data: data
-                        })
-                    }
-				});
+				insertionSort(params);
+				break;
+
+			case 'Selection Sort':
+				selectionSort(params);
 				break;
 				
         }

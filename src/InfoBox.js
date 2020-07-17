@@ -5,7 +5,7 @@ export default class InfoBox extends Component {
     constructor(props){
         super(props);
         this.props = props;
-        this.algorithms = ['Bubble Sort', 'Insertion Sort'];
+        this.algorithms = ['Bubble Sort', 'Insertion Sort', 'Selection Sort'];
     }
     
     render() {
