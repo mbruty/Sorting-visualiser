@@ -3,7 +3,8 @@
 //Worst: O(n^2) time - O(1) Space
 
 import timeout from './Delay'
-export default async function bubbleSort({data, delay, callback}){
+import swap from './Swap';
+export default async function ({data, delay, callback}){
     let isSorted = false;
     let counter = 0;
     while(!isSorted){
@@ -20,10 +21,4 @@ export default async function bubbleSort({data, delay, callback}){
         }
         counter++;
     }
-}
-
-function swap(i, j, array){
-    const tempItem = array[j];
-    array[j] = array[i];
-    array[i] = tempItem;
 }
