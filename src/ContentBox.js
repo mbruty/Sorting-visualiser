@@ -4,7 +4,7 @@ export default class ContentBox extends Component {
 
     render() {
         const data = this.props.data;
-        const elementWidth = 100 / data.length - 0.4;
+        const elementWidth = 100 / data.length -0.1;
         return (
             <div className="content-box">
                 <div className="bar-pannel">
