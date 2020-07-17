@@ -71,7 +71,7 @@ input:focus{
   border-radius: 2px 2px 0px 0px;
   display: inline-block;
   align-self: end;
-  margin-right: 0.2%;
-  margin-left: 0.2%;
+  margin-right: 0.05%;
+  margin-left: 0.05%;
   display: flex;
 }
