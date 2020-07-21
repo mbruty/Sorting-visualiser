@@ -3,7 +3,7 @@ import insertionSort from '../speed test algos/InsertionSort';
 import selectionSort from '../speed test algos/SelectionSort';
 import heapSort from '../speed test algos/HeapSort';
 import quickSort from '../speed test algos/QuickSort';
-
+/* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('message', function(e) {
 	let results = [];
 
@@ -16,7 +16,7 @@ self.addEventListener('message', function(e) {
 	timeFunction(heapSort, e.data, results, 'Heap Sort');
 
 	timeFunction(quickSort, e.data, results, 'Quick Sort');
-
+	/* eslint-disable-next-line no-restricted-globals */
 	self.postMessage(results);
 }, false);
 
