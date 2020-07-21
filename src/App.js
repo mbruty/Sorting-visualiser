@@ -7,6 +7,7 @@ import insertionSort from './sorting algos/InsertionSort';
 import selectionSort from './sorting algos/SelectionSort'
 import heapSort from './sorting algos/HeapSort';
 import quickSort from './sorting algos/QuickSort';
+import randList from './RandList'
 
 
 class App extends React.Component {
@@ -20,22 +21,14 @@ class App extends React.Component {
             data: []
         }
 
-        this.state.data = this.randList(this.state.samples);
+        this.state.data = randList(this.state.samples);
 
         this.onChange = this.onChange.bind(this);
         this.showState = this.showState.bind(this);
-        this.randList = this.randList.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.sort = this.sort.bind(this);
     }
 
-    randList(nItems) {
-        let arr = [];
-        for (let i = 0; i < nItems; ++i) {
-            arr.push(Math.floor(Math.random() * 100));
-        }
-        return arr;
-    }
 
     onChange() {
         this.setState({
@@ -52,7 +45,7 @@ class App extends React.Component {
         } = e.target;
         value = Math.max(Number(min), Math.min(Number(max), Number(value)));
         e.target.value = value;
-        let newList = this.randList(value);
+        let newList = randList(value);
         if (e.target.id == "samples") {
             this.setState({
                 ...this.state,
@@ -67,7 +60,8 @@ class App extends React.Component {
         }
     }
 
-    sort() {
+    sort(e) {
+        e.preventDefault();
 		const params = {
 			data: this.state.data,
 			delay: this.state.delay,

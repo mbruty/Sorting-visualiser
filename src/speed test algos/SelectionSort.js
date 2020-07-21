@@ -2,7 +2,6 @@
 //Average: O(n^2) time - O(1) space
 //Worst: O(n^2) time - O(1) space
 
-import timeout from './Delay'
 import swap from './Swap';
 
 export default async function ({data, delay, callback}){
@@ -13,10 +12,6 @@ export default async function ({data, delay, callback}){
 			if (data[smallestIdx] > data[i]) smallestIdx = i;
 		}
         swap(idx, smallestIdx, data);
-        if(callback){
-            callback(data);
-            await timeout(delay);
-        }
 		++idx;
 	}
 }
