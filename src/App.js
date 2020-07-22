@@ -2,12 +2,9 @@ import React from 'react';
 import './App.css';
 import InfoBox from './InfoBox'
 import ContentBox from './ContentBox';
-import bubbleSort from './sorting algos/BubbleSort';
-import insertionSort from './sorting algos/InsertionSort';
-import selectionSort from './sorting algos/SelectionSort'
-import heapSort from './sorting algos/HeapSort';
-import quickSort from './sorting algos/QuickSort';
 import randList from './RandList'
+// eslint-disable-next-line
+import Worker from 'worker-loader!./workers/Sort.worker.js';
 
 
 class App extends React.Component {
@@ -27,6 +24,9 @@ class App extends React.Component {
         this.showState = this.showState.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.sort = this.sort.bind(this);
+        this.updateData = this.updateData.bind(this);
+
+        this.worker = null;
     }
 
 
@@ -60,40 +60,29 @@ class App extends React.Component {
         }
     }
 
+    // Doing this in a separate function so that it can be binded to this component.
+    updateData(event){
+        this.setState({...this.state, data: event.data});
+    }
+
     sort(e) {
         e.preventDefault();
-		const params = {
-			data: this.state.data,
-			delay: this.state.delay,
-			callback: (data) => {
-				this.setState({
-					...this.state,
-					data: data
-				})
-			}
-		}
-        switch (this.state.algorithm) {
-            case 'Bubble Sort':
-                bubbleSort(params);
-				break;
-			
-			case 'Insertion Sort':
-				insertionSort(params);
-				break;
-
-			case 'Selection Sort':
-				selectionSort(params);
-				break;
-
-			case 'Heap Sort':
-				heapSort(params);
-				break;
-
-			case 'Quick Sort':
-				quickSort(params);
-				break;
-				
+        //Destory the worker if one is already running
+        if(this.worker){
+            this.worker.terminate();
         }
+        this.worker = new Worker();
+        // Using a worker here rather than doing it on the main thread to make it
+        // easier to cancel
+        this.worker.postMessage({
+            data: this.state.data,
+            delay: this.state.delay,
+            algorithm: this.state.algorithm
+        }); // start the sorting worker
+
+        // Read the data posted from the worker to update the state of
+        // the data
+        this.worker.addEventListener('message', this.updateData)
     }
 
     showState() {

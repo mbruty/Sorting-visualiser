@@ -26,7 +26,6 @@ export default class Speed extends Component {
 
     timeAlgos(){
         const data = RandList(this.state.nTimes);
-
           
         this.worker.postMessage(data); // Send data to our worker.
     }
