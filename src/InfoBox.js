@@ -19,7 +19,7 @@ export default class InfoBox extends Component {
                     })}
                 </select>
                 <h2>Number of elements</h2>
-                <input onChange={this.props.handleChange} id="samples" type="number" min="1" max="900" defaultValue="25"/>
+                <input onChange={this.props.handleChange} id="samples" type="number" min="1" max="700" defaultValue="25"/>
                 <h2>Delay between sorting iterations (ms)</h2>
                 <input onChange={this.props.handleChange} id="delay" type="number" min="0" max="1000" defaultValue="25"/>
                 <a href="something" class="button" onClick={this.props.sort}>Sort</a>
