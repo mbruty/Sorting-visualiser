@@ -5,7 +5,6 @@ export default class InfoBox extends Component {
 
     constructor(props){
         super(props);
-        this.props = props;
         this.algorithms = ['Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Heap Sort', 'Quick Sort'];
     }
 
@@ -23,6 +22,7 @@ export default class InfoBox extends Component {
                 <h2>Delay between sorting iterations (ms)</h2>
                 <input onChange={this.props.handleChange} id="delay" type="number" min="0" max="1000" defaultValue="25"/>
                 <a href="something" class="button" onClick={this.props.sort}>Sort</a>
+                <a href="something" class="button" onClick={this.props.reset}>Reset</a>
                 <Speed/>
             </div>
         )

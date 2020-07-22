@@ -14,7 +14,6 @@ class App extends React.Component {
             algorithm: 'Bubble Sort',
             samples: 25,
             delay: 25,
-            sort: false,
             data: []
         }
 
@@ -25,6 +24,7 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.sort = this.sort.bind(this);
         this.updateData = this.updateData.bind(this);
+        this.reset = this.reset.bind(this);
 
         this.worker = null;
     }
@@ -85,6 +85,14 @@ class App extends React.Component {
         this.worker.addEventListener('message', this.updateData)
     }
 
+    reset(e){
+        e.preventDefault();
+        if(this.worker){
+            this.worker.terminate();
+        }
+        this.setState({...this.state, data: randList(this.state.samples)});
+    }
+
     showState() {
         console.log(this.state);
     }
@@ -93,7 +101,7 @@ class App extends React.Component {
         return ( 
 			<div className="App">
 				<ContentBox data={this.state.data}/>
-				<InfoBox onChange={this.onChange} handleChange={this.handleChange} showState={this.showState} sort={this.sort}/>
+				<InfoBox onChange={this.onChange} handleChange={this.handleChange} showState={this.showState} sort={this.sort} reset={this.reset}/>
 			</div>
         )
     }
