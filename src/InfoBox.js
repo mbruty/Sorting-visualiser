@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Speed from './Speed';
+import showCode from './ShowCode';
 
 export default class InfoBox extends Component {
 
@@ -17,6 +18,7 @@ export default class InfoBox extends Component {
                     return <option value={element}>{element}</option>
                     })}
                 </select>
+                <i class="material-icons" onClick={() => {showCode(`${document.getElementById('algorithm').value}`)}}>code</i>
                 <h2>Number of elements</h2>
                 <input onChange={this.props.handleChange} id="samples" type="number" min="1" max="700" defaultValue="25"/>
                 <h2>Delay between sorting iterations (ms)</h2>

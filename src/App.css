@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 *{
   color: white;
   font-family: 'Lato', sans-serif;
   font-size: 1em;
   text-align: center;
+}
+
+i{
+  margin-left: 2%;
+  position: relative;
+  cursor: pointer;
+  top: 5px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 h2{
@@ -32,7 +47,7 @@ h2{
 
 .algo-select{
   height: 4%;
-  width: 90%;
+  width: 80%;
   margin-left: 5%;
   padding-right: 2%;
   outline:0px;
