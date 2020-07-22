@@ -31,9 +31,11 @@ class App extends React.Component {
 
 
     onChange() {
+        this.reset(undefined);
         this.setState({
             ...this.state,
-            algorithm: document.getElementById('algorithm').value
+            algorithm: document.getElementById('algorithm').value,
+            data: randList(this.state.samples)
         });
     }
 
@@ -86,7 +88,9 @@ class App extends React.Component {
     }
 
     reset(e){
-        e.preventDefault();
+        if(e){
+            e.preventDefault();
+        }
         if(this.worker){
             this.worker.terminate();
         }
